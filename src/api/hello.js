@@ -1,3 +1,3 @@
 export function GET(request,response) {
-    return new Response(`Hello from ${process.env.VERCEL_REGION}`);
+    return response.send(`Hello from ${process.env.VERCEL_REGION}`);
 }
