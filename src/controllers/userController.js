@@ -93,8 +93,7 @@ async function updateUserProfile(req,res){
         const usr = JSON.parse(userFront);
         const user = usr || req.user;
         const body = req.body;
-        const file = req.file;
-        console.log(file);
+
         if(!file){
                 const newUser = await User.findByIdAndUpdate(user._id ,{
                 name:body?.name,
