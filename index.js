@@ -1,10 +1,10 @@
 import 'dotenv/config'
-import {connectDB} from "./db/connection.js";
+import {connectDB} from "./src/db/connection.js";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "./routes/userRoute.js";
-import postRouter from './routes/postRoute.js';
+import userRouter from "./src/routes/userRoute.js";
+import postRouter from './src/routes/postRoute.js';
 
 
 // DB_NAME for a collections in Db =>
