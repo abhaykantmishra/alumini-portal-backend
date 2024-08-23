@@ -49,7 +49,7 @@ async function loginUser(req,res){
             })
         }
 
-        const user = await User.findOne({email:email});
+        const user = await User.findOne({email:email}).select(-password);
 
         if(!user){
             return res.status(404).json({
@@ -74,9 +74,7 @@ async function loginUser(req,res){
         .cookie('accessToken', accessToken, options)
         .json({
             msg:"user loggedIn successfuly",
-            user:{
-                _id:user._id,name:user.name,email:user.email
-            },
+            user:user,
             accessToken:accessToken
         })
 

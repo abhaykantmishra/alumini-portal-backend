@@ -39,7 +39,7 @@ async function postJob(req,res){
                 })
             }
             const cloudinaryResponse = await uploadImageOnCloudinary(filePath);
-            if(!filePath){
+            if(!cloudinaryResponse){
                 return res.status(500).json({
                     msg:"Something went wrong while uploading on Clodinary"
                 })
@@ -51,6 +51,12 @@ async function postJob(req,res){
                 public_id:cloudinaryResponse.public_id,
                 api_key:cloudinaryResponse.api_key,
             }
+        }
+
+        if(!thumbnailInfo){
+            return res.status(500).json({
+                msg:"something went wrong!!!!!"
+            })
         }
 
         // creating new post =>
