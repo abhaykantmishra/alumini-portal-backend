@@ -81,7 +81,7 @@ async function loginUser(req,res){
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({
+        return res.status(500).json({
             msg:"Something went wrong!"
         })
     }
@@ -90,49 +90,42 @@ async function loginUser(req,res){
 
 async function updateUserProfile(req,res){
     try {
-        const userFront = req.body.user;
-        const usr = JSON.parse(userFront);
-        const user = usr || req.user;
-        const body = req.body;
 
-        if(!file){
-                const newUser = await User.findByIdAndUpdate(user._id ,{
-                name:body?.name,
-                email:body?.email,
-                })
-                return res.status(200).json({
-                    msg:"user updated",
-                    user:newUser
-                })
-        }
-        const filePath = file.path;
-        const imageFile = await uploadImageOnCloudinary(filePath);
-        if(!imageFile){
-            return res.status(500).json({
-                message:"Something went wrong while uploading image on cloudinary!"
-             })
-        }
-        console.log(imageFile.url);
-        const updatedUser = await User.findByIdAndUpdate(user._id ,{
-            profileImg:imageFile?.url,
-            name:body?.name,
-            email:body?.email,
-        })
-        if(!updatedUser){
-            return res.status(505).json({
-                msg:'user did not updated!'
+        const {userId,name,email,collegeName,_id,branch,state,batch,location,contactNumber,companyName,jobTitle} = req.body;
+
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).json({
+                msg:"No such user Exist with given userId!"
             })
         }
+
+        const updatedUser = await User.findByIdAndUpdate(userId,{
+            name:name,
+            email:email,
+
+        })
             
         // Now update user =>
         return res.status(201).json({
             mesaage:"user profile updated successfully",
-            imageUrl:imageFile.url,
             user:updatedUser,  
+            collegeName:collegeName,
+            branch:branch,
+            state:state,
+            branch:branch,
+            batch:batch,
+            location:location,
+            contactNumber:contactNumber,
+            companyName:companyName,
+            jobTitle:jobTitle
         })
     } 
     catch (error) {
         console.log(`uploading error : ${error}`);
+        return res.status(500).json({
+            msg:"Something went wrong!"
+        })
     }
 }
 

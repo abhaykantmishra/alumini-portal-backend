@@ -55,7 +55,7 @@ async function postJob(req,res){
 
         if(!thumbnailInfo){
             return res.status(500).json({
-                msg:"something went wrong!!!!!"
+                msg:"something went wrong!!!"
             })
         }
 

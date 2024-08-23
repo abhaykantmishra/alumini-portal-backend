@@ -26,7 +26,7 @@ const userSchema = new Schema(
         profileImage:{
             type:String,
         },
-        address:{
+        location:{
             type:String
         },
         roll:{
@@ -38,9 +38,21 @@ const userSchema = new Schema(
                 ref:"User"
             }
         ],
-        colegeName:{
+        branch:{
             type:String,
-        }
+        },
+        state:{
+            type:String,
+        },
+        batch:{
+            type:String,
+        },
+        companyName:{
+            type:String,
+        },
+        jobTitle:{
+            type:String,
+        },
     },
     {
         timestamps:true
