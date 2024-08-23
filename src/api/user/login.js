@@ -1,10 +1,11 @@
 const {loginUser} = require('../../controllers/userController.js')
 
-module.exports = (req,res) => {
+module.exports =async (req,res) => {
 
     if(req.method === 'POST'){
         console.log("it is a post method");
-        loginUser(req,res);
+        const x = await loginUser(req,res);
+        console.log(x);
     }
     else {
         return res.status(300).json({msg:"only post req!!"})
