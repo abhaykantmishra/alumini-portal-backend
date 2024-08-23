@@ -103,13 +103,6 @@ async function updateUserProfile(req,res){
         const updatedUser = await User.findByIdAndUpdate(userId,{
             name:name,
             email:email,
-
-        })
-            
-        // Now update user =>
-        return res.status(201).json({
-            mesaage:"user profile updated successfully",
-            user:updatedUser,  
             collegeName:collegeName,
             branch:branch,
             state:state,
@@ -119,6 +112,18 @@ async function updateUserProfile(req,res){
             contactNumber:contactNumber,
             companyName:companyName,
             jobTitle:jobTitle
+        })
+
+        if(!updatedUser){
+            return res.status(500).json({
+                mesaage:"Couldn't update user profile try again"
+            })
+        }
+            
+        // Now update user =>
+        return res.status(201).json({
+            mesaage:"user profile updated successfully",
+            user:updatedUser,  
         })
     } 
     catch (error) {
