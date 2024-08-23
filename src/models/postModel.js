@@ -2,14 +2,9 @@ import mongoose,{Schema} from "mongoose";
 
 const postSchema = new Schema(
     {
-        userEmail:{
-            type:String,
-            required:true,
-        },
         postedBy:{
             type:mongoose.Types.ObjectId,
             ref:"User",
-            required:true,
         },
         postedByName:{
             type:String,

@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import 'dotenv/config';
 import {connectDB} from "./src/db/connection.js";
 import express from "express";
 import cors from "cors";
@@ -8,7 +8,7 @@ import postRouter from './src/routes/postRoute.js';
 
 
 // DB_NAME for a collections in Db =>
-const DB_NAME = "alumini-portal";
+const DB_NAME = "alumini";
 const PORT = process.env.PORT || 4000;
 
 // connecting mongo-db =>

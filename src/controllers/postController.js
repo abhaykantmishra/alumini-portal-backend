@@ -5,13 +5,13 @@ import User from "../models/userModel.js"
 async function postJob(req,res){
     try {
         console.log("body:",req.body);
-        const {userEmail,title,postedBy,postedByName,description,url} = req.body;
-        if(!userEmail || !title || !postedBy || !postedByName || !description){
+        const {postedBy,postedByName,title,description,category,url} = req.body;
+        if(!title || !postedBy || !postedByName || !category || !description){
             return res.status(400).json({
                 message:"all above fields are required!"
             })
         }
-        if(!(userEmail?.trim()) || !(title?.trim()) || !(postedBy?.trim()) || !(description?.trim()) || !(postedByName?.trim())){
+        if(!(title?.trim()) || !(postedBy?.trim()) || !(category?.trim()) || !(description?.trim()) || !(postedByName?.trim())){
             return res.status(400).json({
                 message:"all fields are required!"
             })
@@ -57,12 +57,12 @@ async function postJob(req,res){
         const createdPost = await Post.create({
             postedBy:postedBy?.trim(),
             postedByName:postedByName?.trim(),
-            userEmail:userEmail?.trim(),
             description : description?.trim(),
             title:title?.trim(),
             url:url?.trim(),
             thumbnail:thumbnailInfo?.fileUrl,
             thumbnailInfo:thumbnailInfo,
+            category:category,
         })
 
         if(!createdPost){
