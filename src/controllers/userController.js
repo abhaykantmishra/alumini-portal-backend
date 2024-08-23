@@ -49,7 +49,7 @@ async function loginUser(req,res){
             })
         }
 
-        const user = await User.findOne({email:email}).select("-password");
+        const user = await User.findOne({email:email});
 
         if(!user){
             return res.status(404).json({
@@ -62,6 +62,7 @@ async function loginUser(req,res){
                 msg:"wrong password!"
             })
         }
+        const usr = await User.findOne({email:email}).select("-password");
         const accessToken = await user.generateAccessToken();
 
         const options = {
@@ -74,7 +75,7 @@ async function loginUser(req,res){
         .cookie('accessToken', accessToken, options)
         .json({
             msg:"user loggedIn successfuly",
-            user:user,
+            user:usr,
             accessToken:accessToken
         })
 
