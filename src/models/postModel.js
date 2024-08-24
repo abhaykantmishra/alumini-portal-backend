@@ -28,6 +28,9 @@ const postSchema = new Schema(
         },
         batchName:{
             type:String,
+        },
+        caegory:{
+            type:String,
         }
     },
     {
