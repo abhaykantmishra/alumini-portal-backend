@@ -29,7 +29,7 @@ const postSchema = new Schema(
         batchName:{
             type:String,
         },
-        caegory:{
+        category:{
             type:String,
         }
     },

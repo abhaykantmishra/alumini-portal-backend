@@ -4,7 +4,7 @@ import User from "../models/userModel.js"
 
 async function postJob(req,res){
     try {
-        console.log("body:",req.body);
+        // console.log("body:",req.body);
         const {postedBy,postedByName,title,description,category,url} = req.body;
         if(!title || !postedBy || !postedByName || !category || !description){
             return res.status(400).json({
@@ -16,6 +16,7 @@ async function postJob(req,res){
                 message:"all fields are required!"
             })
         }
+        // console.log(title,postedBy,postedByName,description,category,url);
 
         const usr = await User.findById(postedBy);
         if(!usr){
@@ -64,11 +65,11 @@ async function postJob(req,res){
             postedBy:postedBy?.trim(),
             postedByName:postedByName?.trim(),
             description : description?.trim(),
+            category:category,
             title:title?.trim(),
             url:url?.trim(),
             thumbnail:thumbnailInfo?.fileUrl,
             thumbnailInfo:thumbnailInfo,
-            category:category,
         })
 
         if(!createdPost){
