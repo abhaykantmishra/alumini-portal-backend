@@ -1,6 +1,23 @@
 import mongoose, {Schema} from "mongoose";
 import jwt from "jsonwebtoken";
 
+const smallUserSchema = new Schema(
+    {
+        name:{
+            type:String,
+            required:true
+        },
+        userId:{
+            type:mongoose.Types.ObjectId,
+            ref:"User",
+            required:true,
+        }
+    },
+    {
+        timestamps:true
+    }
+)
+
 const userSchema = new Schema(
     {
         email:{
@@ -32,12 +49,6 @@ const userSchema = new Schema(
         roll:{
             type:String
         },
-        connectedUsers:[
-            {
-                type:mongoose.Types.ObjectId,
-                ref:"User"
-            }
-        ],
         branch:{
             type:String,
         },
@@ -53,6 +64,16 @@ const userSchema = new Schema(
         jobTitle:{
             type:String,
         },
+        connectedUsers:[
+            {
+                type:smallUserSchema
+            }
+        ],
+        invitations:[
+            {
+                type:smallUserSchema
+            }
+        ]
     },
     {
         timestamps:true
