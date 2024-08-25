@@ -1,7 +1,7 @@
 const { ConnectionStates } = require('mongoose');
 const {loginUser} = require('../../controllers/userController.js')
 
-module.exports =async (req,res) => {
+export default async function(req,res){
 
     if(req.method === 'POST'){
         console.log("it is a post method");
