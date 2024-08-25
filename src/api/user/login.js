@@ -1,3 +1,4 @@
+const { ConnectionStates } = require('mongoose');
 const {loginUser} = require('../../controllers/userController.js')
 
 module.exports =async (req,res) => {
@@ -8,6 +9,12 @@ module.exports =async (req,res) => {
         console.log(x);
     }
     else {
-        return res.status(300).json({msg:"only post req!!"})
+        return fun(req,res);
     }
+}
+
+async function fun(req,res) {
+  return res.json({
+    msg:"good"
+  })
 }
