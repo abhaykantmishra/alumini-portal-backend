@@ -9,7 +9,7 @@ module.exports =async (req,res) => {
         console.log(x);
     }
     else {
-        return fun(req,res);
+        fun(req,res);
     }
 }
 
