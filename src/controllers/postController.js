@@ -1,6 +1,7 @@
 import Post from "../models/postModel.js";
 import { uploadImageOnCloudinary } from "../services/cloudinary.js";
 import User from "../models/userModel.js"
+import mongoose from "mongoose";
 
 async function postJob(req,res){
     try {
@@ -115,7 +116,40 @@ async function getJobs(req,res){
     }
 }
 
+async function getUserPosts(req,res){
+    const userId = req.body;
+    // console.log(userId);
+    try {
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: 'Invalid userId' });
+          }
+      
+          // Convert userId to ObjectId
+        const objectId = new mongoose.Types.ObjectId(userId);
+        console.log(userId);
+        const userPosts = await Post.find({ postedBy: objectId });
+
+        console.log(userPosts);
+        if(!userPosts){
+            return res.status(500).json({
+                msg:"something went wrong while fetching user posts!"
+            })
+        }
+
+        return res.status(200).json({
+            msg:"sent user recent jobs",
+            posts:userPosts
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            msg:"something went wrong while fetching jobs!"
+        })
+    }
+}
+
 export {
     postJob,
-    getJobs
+    getJobs,
+    getUserPosts
 }
