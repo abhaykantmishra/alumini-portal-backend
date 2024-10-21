@@ -36,6 +36,9 @@ const userSchema = new Schema(
         contactNumber:{
             type:String,
         },
+        userimg:{
+            type:String
+        },
         collegeName:{
             type:String,
             required:true,
